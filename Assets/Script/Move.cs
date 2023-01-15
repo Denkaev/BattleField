@@ -39,9 +39,10 @@ public class Move : MonoBehaviour
     bool valid(Vector3 dir)
     {
         // Cast Line from 'next to Pac-Man' to 'Pac-Man'
-        Vector3 pos = transform.position;
-        RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
-        return (hit.collider == GetComponent<Collider2D>());
+        //Vector3 pos = transform.position;
+        //RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
+        //return (hit.collider == GetComponent<Collider2D>());
+        return true;
     }
        
 }
