@@ -7,6 +7,8 @@ public class Move : MonoBehaviour
 {
     public float speed = 0.4f;
     Vector3 dest = Vector3.zero;
+    [SerializeField]
+    private GameObject camera;
     void Start()
     {
         dest = transform.position;
