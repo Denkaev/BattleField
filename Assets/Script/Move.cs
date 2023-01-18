@@ -7,32 +7,36 @@ public class Move : MonoBehaviour
 {
     public float speed = 0.4f;
     Vector3 dest = Vector3.zero;
+    private int indexInMoveList;
     [SerializeField]
     private GameObject camera;
     void Start()
     {
         dest = transform.position;
-        
+        indexInMoveList = GlobalVariables.AddNew(gameObject);
     }
-    
+
     private void FixedUpdate()
     {
         Vector3 p = Vector3.MoveTowards(transform.position, dest, speed);
         GetComponent<Rigidbody>().MovePosition(p);
 
-        // Check for Input if not moving
-        if ((Vector3)transform.position == dest)
+        //Are i move ?
+        if (indexInMoveList == GlobalVariables.ListIndex)
         {
-            if (Input.GetKey(KeyCode.UpArrow) && valid(Vector3.up))
-                dest = (Vector3)transform.position + Vector3.up;
-            if (Input.GetKey(KeyCode.RightArrow) && valid(Vector3.right))
-                dest = (Vector3)transform.position + Vector3.right;
-            if (Input.GetKey(KeyCode.DownArrow) && valid(-Vector3.up))
-                dest = (Vector3)transform.position - Vector3.up;
-            if (Input.GetKey(KeyCode.LeftArrow) && valid(-Vector3.right))
-                dest = (Vector3)transform.position - Vector3.right;
+            // Check for Input if not moving
+            if ((Vector3)transform.position == dest)
+            {
+                if (Input.GetKey(KeyCode.UpArrow) && valid(Vector3.up))
+                    dest = (Vector3)transform.position + Vector3.up;
+                if (Input.GetKey(KeyCode.RightArrow) && valid(Vector3.right))
+                    dest = (Vector3)transform.position + Vector3.right;
+                if (Input.GetKey(KeyCode.DownArrow) && valid(-Vector3.up))
+                    dest = (Vector3)transform.position - Vector3.up;
+                if (Input.GetKey(KeyCode.LeftArrow) && valid(-Vector3.right))
+                    dest = (Vector3)transform.position - Vector3.right;
+            }
         }
-        
         // Animation Parameters
         //Vector3 dir = dest - (Vector3)transform.position;
         //GetComponent<Animator>().SetFloat("DirX", dir.x);
@@ -47,5 +51,5 @@ public class Move : MonoBehaviour
         //return (hit.collider == GetComponent<Collider2D>());
         return true;
     }
-       
+
 }
