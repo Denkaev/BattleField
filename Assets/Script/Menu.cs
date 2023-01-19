@@ -13,4 +13,8 @@ public class Menu : MonoBehaviour
 #endif
     }
 
+    public void Next()
+    {
+        Debug.Log(GlobalVariables.Next());
+    }
 }

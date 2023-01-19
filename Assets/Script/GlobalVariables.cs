@@ -12,4 +12,12 @@ public class GlobalVariables : MonoBehaviour
         MoveTurn.Add(gameObject);
         return ListIndex += 1;
     }
+    static public int Next()
+    {
+        if (MoveTurn.Count - 1 == ListIndex)
+            ListIndex = 0;
+        else
+            ListIndex += 1;
+        return ListIndex;
+    }
 }
