@@ -7,6 +7,7 @@ public class GlobalVariables : MonoBehaviour
 {
     static public List<GameObject> MoveTurn = new List<GameObject>();
     static public int ListIndex = -1;
+    static private GameObject[] UnitProperties;
     static public int AddNew(GameObject gameObject)
     {
         MoveTurn.Add(gameObject);
@@ -18,6 +19,8 @@ public class GlobalVariables : MonoBehaviour
             ListIndex = 0;
         else
             ListIndex += 1;
+        UnitProperties = GameObject.FindGameObjectsWithTag("UnitProperties");
+        //надо перебрать объекты и поменять им всем цвет(пока одному)
         return ListIndex;
     }
 }
