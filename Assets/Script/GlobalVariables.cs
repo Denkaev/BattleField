@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -19,8 +20,25 @@ public class GlobalVariables : MonoBehaviour
             ListIndex = 0;
         else
             ListIndex += 1;
+
         UnitProperties = GameObject.FindGameObjectsWithTag("UnitProperties");
         //надо перебрать объекты и поменять им всем цвет(пока одному)
+        foreach (var item in UnitProperties)
+        {
+            //Debug.Log(item.tag);
+             //var text = item.GetComponent("Text");
+            //MoveTurn[ListIndex]
+            //gameObject
+            //text.font.material.color 
+            //"RGBA(1.000, 1.000, 1.000, 1.000)"
+            //         Debug.Log(text.text); 
+        }
+
         return ListIndex;
     }
+    static public GameObject GetCurrent()
+    {
+        return MoveTurn[ListIndex];
+    }
+
 }
