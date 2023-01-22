@@ -35,6 +35,8 @@ public class Move : MonoBehaviour
                     dest = (Vector3)transform.position - Vector3.up;
                 if (Input.GetKey(KeyCode.LeftArrow) && valid(-Vector3.right))
                     dest = (Vector3)transform.position - Vector3.right;
+                if (Input.GetKey(KeyCode.Tab))
+                    GlobalVariables.Next();
             }
         }
         // Animation Parameters
