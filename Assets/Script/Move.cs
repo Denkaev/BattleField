@@ -24,25 +24,30 @@ public class Move : MonoBehaviour
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
+            MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             // Check for Input if not moving
-            if ((Vector3)transform.position == dest)
-            {
-                if (Input.GetKey(KeyCode.UpArrow) && valid(Vector3.up))
-                    dest = (Vector3)transform.position + Vector3.up;
-                if (Input.GetKey(KeyCode.RightArrow) && valid(Vector3.right))
-                    dest = (Vector3)transform.position + Vector3.right;
-                if (Input.GetKey(KeyCode.DownArrow) && valid(-Vector3.up))
-                    dest = (Vector3)transform.position - Vector3.up;
-                if (Input.GetKey(KeyCode.LeftArrow) && valid(-Vector3.right))
-                    dest = (Vector3)transform.position - Vector3.right;
-                if (Input.GetKey(KeyCode.Tab))
-                    GlobalVariables.Next();
-            }
+            //if ((Vector3)transform.position == dest)
+            //{
+            //    if (Input.GetKey(KeyCode.UpArrow) && valid(Vector3.up))
+            //        dest = (Vector3)transform.position + Vector3.up;
+            //    if (Input.GetKey(KeyCode.RightArrow) && valid(Vector3.right))
+            //        dest = (Vector3)transform.position + Vector3.right;
+            //    if (Input.GetKey(KeyCode.DownArrow) && valid(-Vector3.up))
+            //        dest = (Vector3)transform.position - Vector3.up;
+            //    if (Input.GetKey(KeyCode.LeftArrow) && valid(-Vector3.right))
+            //        dest = (Vector3)transform.position - Vector3.right;
+            //}
         }
+
+        if (Input.GetKey(KeyCode.Tab))
+            GlobalVariables.Next();
+
         // Animation Parameters
         //Vector3 dir = dest - (Vector3)transform.position;
         //GetComponent<Animator>().SetFloat("DirX", dir.x);
         //GetComponent<Animator>().SetFloat("DirY", dir.y);
+
+
     }
 
     bool valid(Vector3 dir)
@@ -53,5 +58,23 @@ public class Move : MonoBehaviour
         //return (hit.collider == GetComponent<Collider2D>());
         return true;
     }
+
+
+    void MoveUnit(float x, float y)
+    {
+        //if (x != 0)
+        //    Debug.Log(x + " " + y);
+        if (x > 0)
+            dest = (Vector3)transform.position + Vector3.up;
+        if (x < 0)
+            dest = (Vector3)transform.position + Vector3.down;
+        if (y < 0)
+            dest = (Vector3)transform.position + Vector3.left;
+        if (y > 0)
+            dest = (Vector3)transform.position + Vector3.right;
+        //Vector3 movementAmount = new Vector3(x, y, 0f) * speed * Time.deltaTime;
+        //transform.Translate(movementAmount);
+    }
+
 
 }
