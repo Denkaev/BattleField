@@ -15,7 +15,6 @@ public class Move : MonoBehaviour
         dest = transform.position;
         indexInMoveList = GlobalVariables.AddNew(gameObject);
     }
-
     private void FixedUpdate()
     {
         Vector3 p = Vector3.MoveTowards(transform.position, dest, speed);
@@ -24,6 +23,8 @@ public class Move : MonoBehaviour
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
+            if (Input.GetKey(KeyCode.Tab))
+                GlobalVariables.Next();
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             // Check for Input if not moving
             //if ((Vector3)transform.position == dest)
@@ -38,10 +39,6 @@ public class Move : MonoBehaviour
             //        dest = (Vector3)transform.position - Vector3.right;
             //}
         }
-
-        if (Input.GetKey(KeyCode.Tab))
-            GlobalVariables.Next();
-
         // Animation Parameters
         //Vector3 dir = dest - (Vector3)transform.position;
         //GetComponent<Animator>().SetFloat("DirX", dir.x);
@@ -62,15 +59,13 @@ public class Move : MonoBehaviour
 
     void MoveUnit(float x, float y)
     {
-        //if (x != 0)
-        //    Debug.Log(x + " " + y);
-        if (x > 0)
-            dest = (Vector3)transform.position + Vector3.up;
-        if (x < 0)
-            dest = (Vector3)transform.position + Vector3.down;
-        if (y < 0)
-            dest = (Vector3)transform.position + Vector3.left;
         if (y > 0)
+            dest = (Vector3)transform.position + Vector3.up;
+        if (y < 0)
+            dest = (Vector3)transform.position + Vector3.down;
+        if (x < 0)
+            dest = (Vector3)transform.position + Vector3.left;
+        if (x > 0)
             dest = (Vector3)transform.position + Vector3.right;
         //Vector3 movementAmount = new Vector3(x, y, 0f) * speed * Time.deltaTime;
         //transform.Translate(movementAmount);
