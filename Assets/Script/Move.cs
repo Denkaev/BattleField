@@ -19,11 +19,15 @@ public class Move : MonoBehaviour
     {
         Vector3 p = Vector3.MoveTowards(transform.position, dest, speed);
         GetComponent<Rigidbody>().MovePosition(p);
+    }
 
+    private void Update()
+    {
+    
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
-            if (Input.GetKey(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab))
                 GlobalVariables.Next();
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             // Check for Input if not moving
@@ -43,8 +47,6 @@ public class Move : MonoBehaviour
         //Vector3 dir = dest - (Vector3)transform.position;
         //GetComponent<Animator>().SetFloat("DirX", dir.x);
         //GetComponent<Animator>().SetFloat("DirY", dir.y);
-
-
     }
 
     bool valid(Vector3 dir)

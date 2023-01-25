@@ -33,7 +33,7 @@ public class GlobalVariables : MonoBehaviour
             //"RGBA(1.000, 1.000, 1.000, 1.000)"
             //         Debug.Log(text.text); 
         }
-
+        Debug.Log(ListIndex);
         return ListIndex;
     }
     static public GameObject GetCurrent()
