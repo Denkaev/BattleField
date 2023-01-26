@@ -10,6 +10,7 @@ public class Move : MonoBehaviour
     private int indexInMoveList;
     [SerializeField]
     private GameObject camera;
+    private bool turnUnit = false;
     void Start()
     {
         dest = transform.position;
@@ -23,12 +24,20 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-    
+
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (turnUnit)
+            {
                 GlobalVariables.Next();
+                turnUnit = false;
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Tab))
+                    turnUnit = true;
+            }
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             // Check for Input if not moving
             //if ((Vector3)transform.position == dest)
