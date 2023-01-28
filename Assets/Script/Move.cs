@@ -9,13 +9,15 @@ public class Move : MonoBehaviour
     Vector3 dest = Vector3.zero;
     private int indexInMoveList;
     [SerializeField]
-    private GameObject camera;
+    //private GameObject camera;
     private bool turnUnit = false;
+    private bool moveUnit = true;
     void Start()
     {
         dest = transform.position;
         indexInMoveList = GlobalVariables.AddNew(gameObject);
     }
+
     private void FixedUpdate()
     {
         Vector3 p = Vector3.MoveTowards(transform.position, dest, speed);
@@ -39,6 +41,7 @@ public class Move : MonoBehaviour
                     turnUnit = true;
             }
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
             // Check for Input if not moving
             //if ((Vector3)transform.position == dest)
             //{
@@ -58,20 +61,24 @@ public class Move : MonoBehaviour
         //GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
 
-    bool valid(Vector3 dir)
-    {
-        // Cast Line from 'next to Pac-Man' to 'Pac-Man'
-        //Vector3 pos = transform.position;
-        //RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
-        //return (hit.collider == GetComponent<Collider2D>());
-        return true;
-    }
+    //bool valid(Vector3 dir)
+    //{
+    //    // Cast Line from 'next to Pac-Man' to 'Pac-Man'
+    //    //Vector3 pos = transform.position;
+    //    //RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
+    //    //return (hit.collider == GetComponent<Collider2D>());
+    //    return true;
+    //}
 
 
     void MoveUnit(float x, float y)
     {
         if (y > 0)
-            dest = (Vector3)transform.position + Vector3.up;
+            if (moveUnit)
+            {
+                dest = (Vector3)transform.position + Vector3.up;
+                moveUnit = false;
+            }
         if (y < 0)
             dest = (Vector3)transform.position + Vector3.down;
         if (x < 0)
