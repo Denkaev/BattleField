@@ -41,6 +41,14 @@ public class Move : MonoBehaviour
                     turnUnit = true;
             }
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            if (Input.GetKeyUp(KeyCode.W))
+                moveUnit = true;
+            if (Input.GetKeyUp(KeyCode.S))
+                moveUnit = true;
+            if (Input.GetKeyUp(KeyCode.A))
+                moveUnit = true;
+            if (Input.GetKeyUp(KeyCode.D))
+                moveUnit = true;
 
             // Check for Input if not moving
             //if ((Vector3)transform.position == dest)
@@ -80,14 +88,27 @@ public class Move : MonoBehaviour
                 moveUnit = false;
             }
         if (y < 0)
-            dest = (Vector3)transform.position + Vector3.down;
+            if (moveUnit)
+            {
+                dest = (Vector3)transform.position + Vector3.down;
+                moveUnit = false;
+            }
         if (x < 0)
-            dest = (Vector3)transform.position + Vector3.left;
+            if (moveUnit)
+            {
+                dest = (Vector3)transform.position + Vector3.left;
+                moveUnit = false;
+            }
         if (x > 0)
-            dest = (Vector3)transform.position + Vector3.right;
+            if (moveUnit)
+            {
+                dest = (Vector3)transform.position + Vector3.right;
+                moveUnit = false;
+            }
+        //if (!Input.anyKeyDown)
+        //    moveUnit = true;
         //Vector3 movementAmount = new Vector3(x, y, 0f) * speed * Time.deltaTime;
         //transform.Translate(movementAmount);
     }
-
 
 }
