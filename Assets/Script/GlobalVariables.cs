@@ -8,7 +8,7 @@ public class GlobalVariables : MonoBehaviour
 {
     static public List<GameObject> MoveTurn = new List<GameObject>();
     static public int ListIndex = -1;
-    static private GameObject[] UnitProperties;
+    //static private GameObject[] UnitProperties;
     static public int AddNew(GameObject gameObject)
     {
         MoveTurn.Add(gameObject);
@@ -21,18 +21,18 @@ public class GlobalVariables : MonoBehaviour
         else
             ListIndex += 1;
 
-        UnitProperties = GameObject.FindGameObjectsWithTag("UnitProperties");
-        //надо перебрать объекты и поменять им всем цвет(пока одному)
-        foreach (var item in UnitProperties)
-        {
-            //Debug.Log(item.tag);
-             //var text = item.GetComponent("Text");
-            //MoveTurn[ListIndex]
-            //gameObject
-            //text.font.material.color 
-            //"RGBA(1.000, 1.000, 1.000, 1.000)"
-            //         Debug.Log(text.text); 
-        }
+        //UnitProperties = GameObject.FindGameObjectsWithTag("UnitProperties");
+        ////надо перебрать объекты и поменять им всем цвет(пока одному)
+        //foreach (var item in UnitProperties)
+        //{
+        //    //Debug.Log(item.tag);
+        //     //var text = item.GetComponent("Text");
+        //    //MoveTurn[ListIndex]
+        //    //gameObject
+        //    //text.font.material.color 
+        //    //"RGBA(1.000, 1.000, 1.000, 1.000)"
+        //    //         Debug.Log(text.text); 
+        //}
         return ListIndex;
     }
     static public GameObject GetCurrent()

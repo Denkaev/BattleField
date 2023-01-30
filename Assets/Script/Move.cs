@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Move : MonoBehaviour
@@ -12,10 +13,14 @@ public class Move : MonoBehaviour
     //private GameObject camera;
     private bool turnUnit = false;
     private bool moveUnit = true;
+    [SerializeField]
+    private int moveSteps = 3;
+    static private GameObject[] UnitProperties;
     void Start()
     {
         dest = transform.position;
         indexInMoveList = GlobalVariables.AddNew(gameObject);
+        UnitProperties = GameObject.FindGameObjectsWithTag("UnitProperties");
     }
 
     private void FixedUpdate()
@@ -30,6 +35,18 @@ public class Move : MonoBehaviour
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
+            foreach (var item in UnitProperties)
+            {
+                var text = item.GetComponent<Text>();
+                text.text = moveSteps.ToString();
+                //Debug.Log(item.tag);
+                //var text = item.GetComponent("Text");
+                //MoveTurn[ListIndex]
+                //gameObject
+                //text.font.material.color 
+                //"RGBA(1.000, 1.000, 1.000, 1.000)"
+                //         Debug.Log(text.text); 
+            }
             if (turnUnit)
             {
                 GlobalVariables.Next();
@@ -42,14 +59,29 @@ public class Move : MonoBehaviour
             }
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             if (Input.GetKeyUp(KeyCode.W))
-                moveUnit = true;
+                if (moveSteps != 0)
+                {
+                    moveUnit = true;
+                    moveSteps -= 1;
+                }
             if (Input.GetKeyUp(KeyCode.S))
-                moveUnit = true;
+                if (moveSteps != 0)
+                {
+                    moveUnit = true;
+                    moveSteps -= 1;
+                }
             if (Input.GetKeyUp(KeyCode.A))
-                moveUnit = true;
+                if (moveSteps != 0)
+                {
+                    moveUnit = true;
+                    moveSteps -= 1;
+                }
             if (Input.GetKeyUp(KeyCode.D))
-                moveUnit = true;
-
+                if (moveSteps != 0)
+                {
+                    moveUnit = true;
+                    moveSteps -= 1;
+                }
             // Check for Input if not moving
             //if ((Vector3)transform.position == dest)
             //{
