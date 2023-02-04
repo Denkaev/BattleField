@@ -15,23 +15,23 @@ public class Setka : MonoBehaviour
         Camera.main.orthographic = true;
         camSize = Camera.main.orthographicSize;
     }
-    void Update()
-    {
-        Camera.main.orthographicSize += Input.mouseScrollDelta.y;
-        if (Camera.main.orthographicSize > 13) Camera.main.orthographicSize = 13;
-        if (!camMove && Input.GetMouseButton(0))
-        {
-            camMove = true;
-            mpClic = Input.mousePosition;
-        }
-        if (camMove)
-        {
-            if (Input.GetMouseButtonUp(0)) camMove = false;
-            Vector3 d = (Input.mousePosition - mpClic).normalized * Vector3.Distance(mpClic, Input.mousePosition) / camSpeed * Time.deltaTime;
-            Camera.main.transform.position += d;
-        }
+    //void Update()
+    //{
+    //    Camera.main.orthographicSize += Input.mouseScrollDelta.y;
+    //    if (Camera.main.orthographicSize > 13) Camera.main.orthographicSize = 13;
+    //    if (!camMove && Input.GetMouseButton(0))
+    //    {
+    //        camMove = true;
+    //        mpClic = Input.mousePosition;
+    //    }
+    //    if (camMove)
+    //    {
+    //        if (Input.GetMouseButtonUp(0)) camMove = false;
+    //        Vector3 d = (Input.mousePosition - mpClic).normalized * Vector3.Distance(mpClic, Input.mousePosition) / camSpeed * Time.deltaTime;
+    //        Camera.main.transform.position += d;
+    //    }
 
-    }
+    //}
     private void OnGUI()
     {
         GuiDrawSnap(new Rect(0, 0, 0, 0), 0);
