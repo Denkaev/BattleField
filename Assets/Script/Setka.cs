@@ -5,52 +5,33 @@ using UnityEngine;
 public class Setka : MonoBehaviour
 {
     Texture2D texture2D;
-    bool camMove;
     public float camSpeed = 50;
     float camSize;
-    Vector3 mpClic;
     void Start()
     {
         texture2D = new Texture2D(1, 1);
         Camera.main.orthographic = true;
         camSize = Camera.main.orthographicSize;
     }
-    //void Update()
-    //{
-    //    Camera.main.orthographicSize += Input.mouseScrollDelta.y;
-    //    if (Camera.main.orthographicSize > 13) Camera.main.orthographicSize = 13;
-    //    if (!camMove && Input.GetMouseButton(0))
-    //    {
-    //        camMove = true;
-    //        mpClic = Input.mousePosition;
-    //    }
-    //    if (camMove)
-    //    {
-    //        if (Input.GetMouseButtonUp(0)) camMove = false;
-    //        Vector3 d = (Input.mousePosition - mpClic).normalized * Vector3.Distance(mpClic, Input.mousePosition) / camSpeed * Time.deltaTime;
-    //        Camera.main.transform.position += d;
-    //    }
-
-    //}
     private void OnGUI()
     {
-        GuiDrawSnap(new Rect(0, 0, 0, 0), 0);
+        GuiDrawSnap();
     }
-    void GuiDrawSnap(Rect r, float snapSize)
+    void GuiDrawSnap()
     {
         float step = Screen.height / 2 / Camera.main.orthographicSize;
         float corrX = Camera.main.transform.position.x - (int)Camera.main.transform.position.x;
         float corrY = Camera.main.transform.position.y - (int)Camera.main.transform.position.y;
         float x = Screen.width / 2 - corrX * step;
 
-        for (float ix = 0; ix < Screen.width / 2 + step; ix += step)
+        for (float ix = step / 2; ix < Screen.width / 2 - 3 * step; ix += step)
         {
-            GUI.DrawTexture(new Rect(x + ix, 0, 1, Screen.height), texture2D);
-            GUI.DrawTexture(new Rect(x - ix, 0, 1, Screen.height), texture2D);
+            GUI.DrawTexture(new Rect(x + ix, 1.5f * step, 1, Screen.height - 2 * step), texture2D);
+            GUI.DrawTexture(new Rect(x - ix, 1.5f * step, 1, Screen.height - 2 * step), texture2D);
         }
-        for (float iy = corrY * step; iy < Screen.height; iy += step)
+        for (float iy = corrY * step + step * 1.5f; iy < Screen.height; iy += step)
         {
-            GUI.DrawTexture(new Rect(0, iy, Screen.width, 1), texture2D);
+            GUI.DrawTexture(new Rect(step * 3.6f, iy, Screen.width - step * 7.2f, 1), texture2D);
         }
     }
 }
