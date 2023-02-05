@@ -21,6 +21,7 @@ public class Move : MonoBehaviour
         dest = transform.position;
         indexInMoveList = GlobalVariables.AddNew(gameObject);
         UnitProperties = GameObject.FindGameObjectsWithTag("UnitProperties");
+        SetStepsRemain();
     }
 
     private void FixedUpdate()
@@ -31,22 +32,9 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
-            foreach (var item in UnitProperties)
-            {
-                var text = item.GetComponent<Text>();
-                text.text = moveSteps.ToString();
-                //Debug.Log(item.tag);
-                //var text = item.GetComponent("Text");
-                //MoveTurn[ListIndex]
-                //gameObject
-                //text.font.material.color 
-                //"RGBA(1.000, 1.000, 1.000, 1.000)"
-                //         Debug.Log(text.text); 
-            }
             if (turnUnit)
             {
                 GlobalVariables.Next();
@@ -58,58 +46,18 @@ public class Move : MonoBehaviour
                     turnUnit = true;
             }
             MoveUnit(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            SetStepsRemain();
             if (Input.GetKeyUp(KeyCode.W))
-                if (moveSteps != 0)
-                {
-                    moveUnit = true;
-                    moveSteps -= 1;
-                }
+                OneStep();
             if (Input.GetKeyUp(KeyCode.S))
-                if (moveSteps != 0)
-                {
-                    moveUnit = true;
-                    moveSteps -= 1;
-                }
+                OneStep();
             if (Input.GetKeyUp(KeyCode.A))
-                if (moveSteps != 0)
-                {
-                    moveUnit = true;
-                    moveSteps -= 1;
-                }
+                OneStep();
             if (Input.GetKeyUp(KeyCode.D))
-                if (moveSteps != 0)
-                {
-                    moveUnit = true;
-                    moveSteps -= 1;
-                }
-            // Check for Input if not moving
-            //if ((Vector3)transform.position == dest)
-            //{
-            //    if (Input.GetKey(KeyCode.UpArrow) && valid(Vector3.up))
-            //        dest = (Vector3)transform.position + Vector3.up;
-            //    if (Input.GetKey(KeyCode.RightArrow) && valid(Vector3.right))
-            //        dest = (Vector3)transform.position + Vector3.right;
-            //    if (Input.GetKey(KeyCode.DownArrow) && valid(-Vector3.up))
-            //        dest = (Vector3)transform.position - Vector3.up;
-            //    if (Input.GetKey(KeyCode.LeftArrow) && valid(-Vector3.right))
-            //        dest = (Vector3)transform.position - Vector3.right;
-            //}
+                OneStep();           
         }
-        // Animation Parameters
-        //Vector3 dir = dest - (Vector3)transform.position;
-        //GetComponent<Animator>().SetFloat("DirX", dir.x);
-        //GetComponent<Animator>().SetFloat("DirY", dir.y);
+
     }
-
-    //bool valid(Vector3 dir)
-    //{
-    //    // Cast Line from 'next to Pac-Man' to 'Pac-Man'
-    //    //Vector3 pos = transform.position;
-    //    //RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
-    //    //return (hit.collider == GetComponent<Collider2D>());
-    //    return true;
-    //}
-
 
     void MoveUnit(float x, float y)
     {
@@ -137,10 +85,25 @@ public class Move : MonoBehaviour
                 dest = (Vector3)transform.position + Vector3.right;
                 moveUnit = false;
             }
-        //if (!Input.anyKeyDown)
-        //    moveUnit = true;
-        //Vector3 movementAmount = new Vector3(x, y, 0f) * speed * Time.deltaTime;
-        //transform.Translate(movementAmount);
     }
 
+    public void SetStepsRemain()
+    {
+        foreach (var item in UnitProperties)
+        {
+            var text = item.GetComponent<Text>();
+            text.text = moveSteps.ToString();
+            Debug.Log(text.text);
+        }
+    }
+
+    public void OneStep()
+    {
+        if (moveSteps != 0)
+        {
+            moveUnit = true;
+            moveSteps -= 1;
+            //SetStepsRemain();
+        }
+    }
 }

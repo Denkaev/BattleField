@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
     public void Next()
     {
         GlobalVariables.Next();
-        //Debug.Log(GlobalVariables.Next());
+        // не работает
+        //     GlobalVariables.MoveTurn[GlobalVariables.ListIndex].GetComponent<Move>().SetStepsRemain();
     }
+
 }
