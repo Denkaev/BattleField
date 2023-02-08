@@ -35,6 +35,18 @@ public class Move : MonoBehaviour
         //Are i move ?
         if (indexInMoveList == GlobalVariables.ListIndex)
         {
+            //Тут ставим свой цвет
+            //GameObject Parent = GameObject.Find("ParentObject");
+            //for (int x = 0; x > Parent.transform.childCount; x++) ;
+            //{
+            //    Parent.transform.GetChild(x).GetComponent<Renderer>().material.color = Color.red;
+            //}
+            //foreach (var item in UnitProperties)
+            //{
+            //    item.GetComponent<Font>();
+            //    //gameObject.GetComponent<Renderer>().material.color = Color.red;
+            //}
+                       
             if (turnUnit)
             {
                 GlobalVariables.Next();
@@ -93,7 +105,8 @@ public class Move : MonoBehaviour
         {
             var text = item.GetComponent<Text>();
             text.text = moveSteps.ToString();
-            Debug.Log(text.text);
+            text.color = gameObject.GetComponent<Renderer>().material.color;
+            //Debug.Log(text.text);
         }
     }
 
